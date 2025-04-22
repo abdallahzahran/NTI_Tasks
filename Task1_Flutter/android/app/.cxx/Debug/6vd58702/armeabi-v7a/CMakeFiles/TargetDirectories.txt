@@ -1,0 +1,2 @@
+D:/NTI/Task1_Flutter/android/app/.cxx/Debug/6vd58702/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/NTI/Task1_Flutter/android/app/.cxx/Debug/6vd58702/armeabi-v7a/CMakeFiles/rebuild_cache.dir
