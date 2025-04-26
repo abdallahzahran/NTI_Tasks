@@ -97,14 +97,15 @@ class HomeScreen extends StatelessWidget {
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
-            ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return CustomCard();
-              },
-              separatorBuilder: (context, index) => SizedBox(height: 12),
+            Expanded(
+              child: ListView.builder(
+
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return CustomCard();
+                },
+               // builder: (context, index) => SizedBox(height: 12),
+              ),
             ),
           ],
         ),

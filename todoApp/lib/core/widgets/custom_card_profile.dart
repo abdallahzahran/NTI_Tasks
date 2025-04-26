@@ -1,11 +1,12 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:todoapp/core/utils/app_assets.dart';
 
 import '../utils/app_colors.dart';
 class CustomCardProfile extends StatelessWidget {
   final String iconPath;
-
-  const CustomCardProfile({super.key, required this.iconPath});
+  final String text;
+  const CustomCardProfile({super.key, required this.iconPath, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,10 @@ class CustomCardProfile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SvgPicture.asset(iconPath),
+               SizedBox(width: 10,),
+                Text('$text'),
+                Spacer(),
+                SvgPicture.asset(AppAssets.arrow2),
               ]
             ),
           ],
