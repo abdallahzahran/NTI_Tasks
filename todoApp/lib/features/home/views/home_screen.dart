@@ -6,6 +6,7 @@ import 'package:todoapp/core/utils/app_text_styles.dart';
 import 'package:todoapp/core/widgets/custom_card.dart';
 import 'package:todoapp/features/profile/views/profile_screen.dart';
 
+import 'add_task.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -31,10 +32,12 @@ class HomeScreen extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     child: Image.asset(AppAssets.flag, fit: BoxFit.cover),
                   ),
-                  onTap: (){Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProfileScreen()),
-                  );},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfileScreen()),
+                    );
+                  },
                 ),
                 SizedBox(width: MediaQuery.of(context).size.height * 0.02),
                 Column(
@@ -57,7 +60,15 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                SvgPicture.asset(AppAssets.plus),
+                IconButton(
+                  icon: SvgPicture.asset(AppAssets.plus),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddTaskView()),
+                    );
+                  },
+                ),
                 SizedBox(width: 20),
               ],
             ),
@@ -99,12 +110,11 @@ class HomeScreen extends StatelessWidget {
 
             Expanded(
               child: ListView.builder(
-
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return CustomCard();
                 },
-               // builder: (context, index) => SizedBox(height: 12),
+                // builder: (context, index) => SizedBox(height: 12),
               ),
             ),
           ],

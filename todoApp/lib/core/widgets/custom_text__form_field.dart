@@ -6,12 +6,14 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final String prefixIconPath;
   final String? suffixIconPath;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
 
   CustomTextFormField({
     required this.label,
     this.obscureText = false,
     required this.prefixIconPath,
-    this.suffixIconPath,
+    this.suffixIconPath,  this.controller,  this.validator,
   });
 
   Widget _buildIcon(String path) {
@@ -31,6 +33,8 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: TextFormField(
+        controller: controller,
+        validator: validator,
         obscureText: obscureText,
         decoration: InputDecoration(
           hintText: label,
