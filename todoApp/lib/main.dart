@@ -12,6 +12,9 @@ class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Lexend Deca',
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(body:SplachScreen(),
       ));

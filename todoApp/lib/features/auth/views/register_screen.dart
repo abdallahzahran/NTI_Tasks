@@ -1,10 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/utils/app_assets.dart';
-import 'package:todoapp/core/utils/app_text_styles.dart';
 import 'package:todoapp/core/widgets/custom_elevated_button.dart';
 import 'package:todoapp/core/widgets/custom_text__form_field.dart';
 import 'package:todoapp/features/auth/views/login_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/utils/app_colors.dart';
 import '../manager/login_cubit/login_cubit.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -73,35 +74,58 @@ class RegisterScreen extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already Have An Account? ",
-                          style: AppTextStyles.letStart(
-                            fontsize: 14,
-                            fontWeight: FontWeight.w200,
+                    RichText(
+                      text: TextSpan(
+                        text: 'Already Have An Account? ',
+                        style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Login',
+                            style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.primary),
+                            recognizer:
+                            TapGestureRecognizer()
+                              ..onTap = () {
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginScreen(),
+                                  ),
+                                );
+                              },
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Login",
-                            style: AppTextStyles.letStart(
-                              fontsize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       "Already Have An Account? ",
+                    //       style: AppTextStyles.letStart(
+                    //         fontsize: 14,
+                    //         fontWeight: FontWeight.w200,
+                    //       ),
+                    //     ),
+                    //     GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) => LoginScreen(),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Text(
+                    //         "Login",
+                    //         style: AppTextStyles.letStart(
+                    //           fontsize: 14,
+                    //           fontWeight: FontWeight.w400,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

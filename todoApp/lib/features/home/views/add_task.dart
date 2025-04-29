@@ -20,25 +20,48 @@ class AddTaskView extends StatelessWidget {
               fit: BoxFit.fill,
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            CustomTextFormField(
-              label: 'Title',
-              prefixIconPath: '',
-            ),
+            CustomTextFormField(label: 'Title', prefixIconPath: ''),
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            CustomTextFormField(
-              label: 'Description',
-              prefixIconPath: '',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              child: TextFormField(
+                maxLines: null,
+                minLines: null,
+                expands: false,
+                decoration: InputDecoration(
+                  hintText: 'Description',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(color: Colors.blue, width: 2),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(color: Colors.grey, width: 1),
+                  ),
+                ),
+              ),
             ),
 
-
+            // CustomTextFormField(
+            //   label: 'Description',
+            //   prefixIconPath: '',
+            //   expands: true,
+            // ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            CustomElevatedButton(textButton: 'AddTask', onPressed: () { Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileScreen()),
-            );}),
+            CustomElevatedButton(
+              textButton: 'AddTask',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+              },
+            ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-
           ],
         ),
       ),
