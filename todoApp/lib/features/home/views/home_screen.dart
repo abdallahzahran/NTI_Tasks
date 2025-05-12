@@ -4,8 +4,9 @@ import 'package:todoapp/core/utils/app_assets.dart';
 import 'package:todoapp/core/utils/app_colors.dart';
 import 'package:todoapp/core/utils/app_text_styles.dart';
 import 'package:todoapp/features/profile/views/profile_screen.dart';
+import '../../../core/helper/my_navigator.dart';
 import '../../../core/widgets/custom_card_task.dart';
-import 'add_task.dart';
+import '../../add_tasks/views/add_task_view.dart';
 
 
 
@@ -19,10 +20,7 @@ class HomeScreen extends StatelessWidget {
         shape: CircleBorder(),
         backgroundColor: AppColors.primary,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddTaskView()),
-          );
+          MyNavigator.goTo(screen: ()=> AddTaskView());
         },
         child: SvgPicture.asset(AppAssets.add),
       ),

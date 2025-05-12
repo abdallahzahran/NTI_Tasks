@@ -1,10 +1,14 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:todoapp/core/utils/app_text_styles.dart';
-import 'package:todoapp/features/auth/views/login_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todoapp/core/widgets/custom_elevated_button.dart';
+import 'package:todoapp/features/auth/views/register_screen.dart';
+
+import '../../core/cache/cache_helper.dart';
+import '../../core/cache/cache_keys.dart';
+import '../../core/helper/my_navigator.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
-import '../../core/widgets/custom_elevated_button.dart';
 
 class LetStartScreen extends StatelessWidget {
   const LetStartScreen({super.key});
@@ -12,45 +16,57 @@ class LetStartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-            SvgPicture.asset(
-              AppAssets.letStart,
-              height: MediaQuery.of(context).size.height * 0.42,
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-            Text(
-              'Welcome To\n Do It ! ',
-              style: AppTextStyles.letStart(),
-              textAlign: TextAlign.center,
-            ),
+      body: PopScope(
+        canPop: false,
+        child: Padding(
+          padding:  EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.05,
+              bottom: MediaQuery.of(context).size.height * 0.045,
+              right: 22,
+              left: 22
+          ),
 
-            Text(
-              'Ready to conquer your tasks? Let\'s Do It together.',
-              style: AppTextStyles.letStart(
-                color: AppColors.grey,
-                fontsize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.center,
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children:
+              [
+                // svg image
+                SvgPicture.asset(
+                  AppAssets.letStart,
+                  width: MediaQuery.of(context).size.width*0.8,
+                ),
+
+                // welcome text
+                Text('welcome To \n Do It',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.black
+                  ),),
+
+                // text
+                Text('',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.grey
+                  ),),
+
+                // get started button
+                CustomElevatedButton(textButton: 'lets start', onPressed: ()async
+                {
+                  await CacheHelper.saveData(key: CacheKeys.firstTime, value: false);
+                  MyNavigator.goTo(screen: ()=> RegisterView());
+                },)
+              ],
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-            CustomElevatedButton(
-              textButton: 'Let’s Start',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  LoginScreen()),
-                );
-              },
-              color: AppColors.primary,
-            ),
-          ],
+          ),
         ),
       ),
+
     );
   }
 }

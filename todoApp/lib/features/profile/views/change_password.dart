@@ -18,6 +18,7 @@ class ChangePasswordView extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.36,
               width: double.infinity,
               fit: BoxFit.fill,
+
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             CustomTextFormField(

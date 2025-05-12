@@ -4,9 +4,9 @@ import 'package:todoapp/core/utils/app_assets.dart';
 
 class CustomCard extends StatelessWidget {
   final String statusText;
-  final Color statusColor;         // لون الخلفية
-  final Color statusTextColor;     // لون النص
-  final String statusIcon;         // مسار الأيقونة
+  final Color statusColor;
+  final Color statusTextColor;
+  final String statusIcon;
 
   const CustomCard({
     super.key,

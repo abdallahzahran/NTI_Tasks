@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todoapp/core/utils/app_assets.dart';
 import 'package:todoapp/core/utils/app_colors.dart';
 import 'package:todoapp/core/widgets/custom_elevated_button.dart';
@@ -7,6 +8,7 @@ import 'package:todoapp/core/widgets/custom_text__form_field.dart';
 import 'package:todoapp/features/home/views/home_screen.dart';
 import 'package:todoapp/features/auth/views/register_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/translation/translation_keys.dart';
 import '../manager/login_cubit/login_cubit.dart';
 import '../manager/login_cubit/login_state.dart';
 
@@ -50,10 +52,10 @@ class LoginScreen extends StatelessWidget {
                           fit: BoxFit.fill,
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01,
+                          height: MediaQuery.of(context).size.height * 0.02,
                         ),
                         CustomTextFormField(
-                          label: 'Username',
+                          label: TranslationKeys.userName.tr,
                           prefixIconPath: AppAssets.profile,
                           controller: LoginCubit.get(context).emailController,
                           validator: (String? value) {
@@ -81,19 +83,15 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02,
                         ),
-                        CustomElevatedButton(
-                          textButton: 'Login',
-                          onPressed: () {
-                            LoginCubit.get(context).onLoginPressed();
-
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => HomeScreen(),
-                            //   ),
-                            // );
-                          },
+                        state is LoginLoadingState ?
+                        Center(child: CircularProgressIndicator(),)
+                            :
+                        CustomElevatedButton(onPressed: LoginCubit.get(context).onLoginPressed,
+                          textButton: TranslationKeys.login,
                         ),
+
+
+
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.05,
                         ),
@@ -116,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder:
-                                                (context) => RegisterScreen(),
+                                                (context) => RegisterView(),
                                           ),
                                         );
                                       },

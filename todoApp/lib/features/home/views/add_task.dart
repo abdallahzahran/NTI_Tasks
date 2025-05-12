@@ -4,8 +4,8 @@ import 'package:todoapp/core/widgets/custom_elevated_button.dart';
 import 'package:todoapp/core/widgets/custom_text__form_field.dart';
 import 'package:todoapp/features/profile/views/profile_screen.dart';
 
-class AddTaskView extends StatelessWidget {
-  const AddTaskView({super.key});
+class AddTask extends StatelessWidget {
+  const AddTask({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/widgets/custom_card_profile.dart';
 import 'package:todoapp/features/profile/views/change_password.dart';
+import 'package:todoapp/features/profile/views/setting_view.dart';
 import 'package:todoapp/features/profile/views/update_profile.dart';
 import 'package:todoapp/features/splach/splach_screen.dart';
 import '../../../core/utils/app_assets.dart';
@@ -46,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SplachScreen()),
+                      MaterialPageRoute(builder: (context) => SplashView()),
                     );
                   },
                 ),
@@ -107,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  MaterialPageRoute(builder: (context) => SettingsView()),
                 );
               },
             ),
