@@ -37,8 +37,8 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginErrorState(failure));
       },
           (data) {
-        // هنا ممكن تخزن التوكن أو البيانات حسب اللي راجع من الـ API
-        emit(LoginSuccessState());
+
+        emit(LoginSuccessState(data));
       },
     );
   }

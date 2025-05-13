@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-
 import 'core/cache/cache_data.dart';
 import 'core/cache/cache_helper.dart';
 import 'core/translation/translation_helper.dart';
+import 'features/home/manager/cubit/user_cubit/user_cubit.dart';
 import 'features/splach/splach_screen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await TranslationHelper.setLanguage();
-  runApp( TodoApp());
+  runApp(const TodoApp());
 }
 
 class TodoApp extends StatelessWidget {
@@ -18,14 +19,17 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+   return BlocProvider(
+      create: (context)=> UserCubit(),
+      child: GetMaterialApp(
         locale: Locale(CacheData.lang!),
         translations: TranslationHelper(),
-      theme: ThemeData(
-        fontFamily: 'Lexend Deca',
+        theme: ThemeData(
+          fontFamily: 'Lexend Deca',
+        ),
+        debugShowCheckedModeBanner: false,
+        home:  SplashView(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(body:SplashView(),
-      ));
+    );
   }
 }

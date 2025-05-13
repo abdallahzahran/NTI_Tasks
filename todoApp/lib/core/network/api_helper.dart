@@ -13,7 +13,7 @@ class ApiHelper
       BaseOptions(
         baseUrl: EndPoints.baseUrl,
         connectTimeout: Duration(seconds: 5),
-        receiveTimeout: Duration(seconds: 5),
+        receiveTimeout: Duration(seconds: 10),
       )
   );
 

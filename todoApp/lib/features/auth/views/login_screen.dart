@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todoapp/core/helper/my_navigator.dart';
 import 'package:todoapp/core/utils/app_assets.dart';
 import 'package:todoapp/core/utils/app_colors.dart';
 import 'package:todoapp/core/widgets/custom_elevated_button.dart';
@@ -9,6 +10,7 @@ import 'package:todoapp/features/home/views/home_screen.dart';
 import 'package:todoapp/features/auth/views/register_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/translation/translation_keys.dart';
+import '../../home/manager/cubit/user_cubit/user_cubit.dart';
 import '../manager/login_cubit/login_cubit.dart';
 import '../manager/login_cubit/login_state.dart';
 
@@ -29,11 +31,12 @@ class LoginScreen extends StatelessWidget {
                     ScaffoldMessenger.of(
                       context,
                     ).showSnackBar(SnackBar(content: Text('Success')));
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
+                     UserCubit.get(context).getUserData(user: state.userModel) ;
+                     MyNavigator.goTo(screen: HomeScreen());
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => HomeScreen()),
+                    // );
                   } else if (state is LoginErrorState) {
                     ScaffoldMessenger.of(
                       context,

@@ -1,6 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:todoapp/features/home/data/models/user_model.dart';
 
+import '../../../../core/cache/cache_helper.dart';
+import '../../../../core/cache/cache_keys.dart';
 import '../../../../core/network/api_helper.dart';
 import '../../../../core/network/end_points.dart';
 
@@ -9,7 +13,7 @@ class AuthRepo
 {
   ApiHelper apiHelper = ApiHelper();
 
-  Future<Either<String, void>> register({required String username, required String password})async
+  Future<Either<String, void>> register({required String username, required String password, XFile? image})async
   {
     try
     {
@@ -18,7 +22,9 @@ class AuthRepo
           data:
           {
             'username': username,
-            'password': password
+            'password': password,
+            'image': image == null ? null :
+            await MultipartFile.fromFile(image.path, filename: image.name),
           }
       );
       return Right(null);
@@ -38,7 +44,7 @@ class AuthRepo
   }
 
 
-  Future<Either<String, Map<String, dynamic>>> login({
+  Future<Either<String, UserModel>> login({
     required String username,
     required String password,
   }) async {
@@ -48,14 +54,30 @@ class AuthRepo
         data: {
           'username': username,
           'password': password,
+
         },
       );
 
-      // تأكد إن الاستجابة عبارة عن JSON
-      if (response.data is Map<String, dynamic>) {
-        return Right(response.data);
-      } else {
-        return Left("Unexpected response format");
+      LoginResponseModel loginResponseModel =
+          LoginResponseModel.fromJson(response.data);
+      if(loginResponseModel.status != null && loginResponseModel.status == true)
+      {
+        // store tokens
+        await CacheHelper.saveData(key: CacheKeys.accessToken, value: loginResponseModel.accessToken);
+        await CacheHelper.saveData(key: CacheKeys.refreshToken, value: loginResponseModel.refreshToken);
+        // return user model
+        if(loginResponseModel.user != null)
+        {
+          return Right(loginResponseModel.user!);
+        }
+        else
+        {
+          throw Exception("Login Failed\nTry Again later");
+        }
+      }
+      else
+      {
+        throw Exception("Login Failed\nTry Again later");
       }
     } catch (e) {
       if (e is DioException) {
